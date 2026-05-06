@@ -2,6 +2,10 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "cleanUrls": true,
   "trailingSlash": false,
+  "framework": null,
+  "buildCommand": null,
+  "outputDirectory": ".",
+  "installCommand": null,
   "redirects": [
     { "source": "/who-is", "destination": "/#about", "permanent": true },
     { "source": "/who-is.html", "destination": "/#about", "permanent": true },
