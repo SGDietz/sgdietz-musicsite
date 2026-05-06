@@ -39,5 +39,5 @@ SG Dietz (full name: Scott Gregory Dietz) is the originator of every track — h
 - Web form: https://sgdietz.com/contact.html
 
 ## Pages
-- [Home](https://sgdietz.com/) — songs, video, streaming links, full bio (in FAQ), and email signup
-- [Contact](https://sgdietz.com/contact.html) — direct contact and message form
+- Single-page site: [https://sgdietz.com/](https://sgdietz.com/) — songs, video, streaming links, full bio (in FAQ), and direct contact via Email/Telegram/WhatsApp.
+- Anchors: `#music`, `#about`, `#contact`

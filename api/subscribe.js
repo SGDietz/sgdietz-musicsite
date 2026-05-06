@@ -3,10 +3,23 @@
 //   RESEND_API_KEY       — Resend API key
 //   RESEND_AUDIENCE_ID   — Resend audience UUID (create in Resend dashboard)
 
+const ALLOWED_ORIGINS = new Set([
+  "https://sgdietz.com",
+  "https://www.sgdietz.com",
+  "https://sgdietz-site.vercel.app",
+  "https://sgdietz-musicsite.vercel.app",
+]);
+
 export default async function handler(req, res) {
   if (req.method !== "POST") {
     res.setHeader("Allow", "POST");
     return res.status(405).json({ error: "Method not allowed" });
+  }
+
+  // CSRF-style origin check (block cross-origin spam)
+  const origin = req.headers.origin || "";
+  if (origin && !ALLOWED_ORIGINS.has(origin) && !/\.vercel\.app$/.test(new URL(origin).hostname)) {
+    return res.status(403).json({ error: "Forbidden origin" });
   }
 
   const apiKey = process.env.RESEND_API_KEY;
@@ -29,7 +42,10 @@ export default async function handler(req, res) {
   }
 
   const email = (body && body.email || "").trim().toLowerCase();
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+  // RFC-5322-lite: alphanumeric + common specials, exactly one @, dot in domain, sane lengths
+  const emailValid = email.length <= 254 &&
+    /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/.test(email);
+  if (!emailValid) {
     return res.status(400).json({ error: "Please enter a valid email." });
   }
 

@@ -1,5 +1,64 @@
 /* SG Dietz site — dark mode, mirroring the Bandzoogle "encore" theme */
 
+/* ===== Animations ===== */
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes kenBurns {
+  0%   { transform: scale(1) translate(0, 0); }
+  50%  { transform: scale(1.06) translate(-1.5%, -1%); }
+  100% { transform: scale(1) translate(0, 0); }
+}
+
+@keyframes underlineGrow {
+  from { width: 0; }
+  to   { width: 60px; }
+}
+
+@keyframes marqueeScroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+@keyframes goldShimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* Scroll-reveal: initial hidden state */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity .8s cubic-bezier(.2,.7,.2,1), transform .8s cubic-bezier(.2,.7,.2,1);
+  will-change: opacity, transform;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Reduce motion preference: disable animations */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal { opacity: 1; transform: none; }
+}
+
+/* ===== End animations ===== */
+
+
 :root {
   /* Bandzoogle palette extracted from existing site */
   --bg:        #000000;            /* pure black like Bandzoogle */
@@ -141,12 +200,23 @@ strong { color: #efe4c0; font-weight: 700; }
   max-width: 100%;
   margin: 0 auto;
   object-fit: contain;
+  animation: kenBurns 18s ease-in-out infinite;
+}
+.hero-bg {
+  animation: kenBurns 24s ease-in-out infinite reverse;
 }
 .hero-text {
   text-align: center;
   padding: 2.2rem 1.25rem 0.5rem;
   max-width: var(--max-w);
   margin: 0 auto;
+  animation: fadeIn .8s ease-out both;
+}
+.hero-text h1 {
+  animation: fadeUp .9s cubic-bezier(.2,.7,.2,1) .1s both;
+}
+.hero-text .tagline {
+  animation: fadeUp .9s cubic-bezier(.2,.7,.2,1) .35s both;
 }
 .hero-text h1 {
   margin-bottom: 0.3em;
@@ -195,13 +265,36 @@ section {
 .songs h2::after,
 .video h2::after,
 .streaming h2::after,
-.faq h2::after {
+.faq h2::after,
+.messaging h2::after,
+.bio h2::after {
   content: "";
   display: block;
   width: 60px;
   height: 1px;
-  background: var(--gold);
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
   margin: 0.6em auto 0;
+  animation: underlineGrow 1s cubic-bezier(.2,.7,.2,1) .3s both;
+}
+/* Animated nav-link underline */
+.nav-links a {
+  position: relative;
+  padding-bottom: 4px;
+}
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  left: 50%; bottom: 0;
+  width: 0; height: 1px;
+  background: var(--gold);
+  transition: width .25s ease, left .25s ease;
+}
+.nav-links a:hover::after {
+  width: 100%;
+  left: 0;
+}
+.nav-links a[aria-current="page"]::after {
+  width: 100%; left: 0;
 }
 
 /* 5-card grid: 3 on top, 2 centered below on desktop. 2-2-1 (last centered) on tablet. 1-col on mobile. */
@@ -475,6 +568,46 @@ section {
 .signup-status.ok { color: var(--gold); font-weight: 600; }
 .signup-status.err { color: #e57373; font-weight: 600; }
 
+/* ---------- Genre marquee (Mismatched Plaids section) ---------- */
+.genre-marquee {
+  position: relative;
+  margin: 1.5rem -1.25rem;
+  padding: 0.4rem 0;
+  overflow: hidden;
+  mask-image: linear-gradient(90deg, transparent 0, #000 8%, #000 92%, transparent 100%);
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 8%, #000 92%, transparent 100%);
+}
+.genre-track {
+  display: flex;
+  gap: 1rem;
+  width: max-content;
+  animation: marqueeScroll 32s linear infinite;
+}
+.genre-marquee:hover .genre-track {
+  animation-play-state: paused;
+}
+.genre-pill {
+  flex-shrink: 0;
+  padding: 0.55rem 1.4rem;
+  border: 1px solid rgba(196, 180, 130, 0.45);
+  border-radius: 999px;
+  font-family: "Cabin", sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--gold);
+  background: linear-gradient(180deg, rgba(196,180,130,0.06) 0%, transparent 100%);
+  white-space: nowrap;
+  transition: transform .2s ease, color .2s ease, border-color .2s ease;
+}
+.genre-pill:hover {
+  transform: translateY(-2px) scale(1.05);
+  color: #f0e2b6;
+  border-color: var(--gold);
+  cursor: default;
+}
+
 /* ---------- Messaging buttons (contact page) ---------- */
 .messaging { max-width: 880px; }
 .messaging .subhead {
@@ -488,8 +621,15 @@ section {
   gap: 1.1rem;
   grid-template-columns: repeat(2, 1fr);
 }
+.msg-grid-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+@media (max-width: 800px) {
+  .msg-grid-3 { grid-template-columns: repeat(2, 1fr); }
+}
 @media (max-width: 540px) {
-  .msg-grid { grid-template-columns: 1fr; }
+  .msg-grid,
+  .msg-grid-3 { grid-template-columns: 1fr; }
 }
 .msg-btn {
   display: grid;

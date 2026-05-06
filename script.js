@@ -9,6 +9,32 @@ document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll('input[name="started_at"]').forEach((el) => { el.value = now; });
 
   wireForm("signup-form", "signup-status", "/api/subscribe", "Thanks — you're on the list.");
+
+  // Auto-tag content sections for scroll-reveal animation
+  const reveals = document.querySelectorAll('main > section, main > section > h2, .song-card, .faq details, .msg-btn, .streaming-list li');
+  reveals.forEach((el) => el.classList.add('reveal'));
+
+  // Intersection Observer for scroll-reveal
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          // Stagger by index within parent for grid items
+          const el = entry.target;
+          const siblings = el.parentElement ? Array.from(el.parentElement.children).filter((c) => c.classList && c.classList.contains('reveal')) : [];
+          const idx = siblings.indexOf(el);
+          el.style.transitionDelay = idx > 0 ? `${Math.min(idx * 60, 480)}ms` : '0ms';
+          el.classList.add('visible');
+          io.unobserve(el);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+  } else {
+    // No IO support: just show everything
+    document.querySelectorAll('.reveal').forEach((el) => el.classList.add('visible'));
+  }
 });
 
 function wireForm(formId, statusId, endpoint, successMsg) {
