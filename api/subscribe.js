@@ -6,7 +6,6 @@
 const ALLOWED_ORIGINS = new Set([
   "https://sgdietz.com",
   "https://www.sgdietz.com",
-  "https://sgdietz-site.vercel.app",
   "https://sgdietz-musicsite.vercel.app",
 ]);
 
