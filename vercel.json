@@ -3,7 +3,8 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "redirects": [
-    { "source": "/who-is", "destination": "/who-is.html", "permanent": true },
+    { "source": "/who-is", "destination": "/", "permanent": true },
+    { "source": "/who-is.html", "destination": "/", "permanent": true },
     { "source": "/contact", "destination": "/contact.html", "permanent": true }
   ],
   "headers": [
