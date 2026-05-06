@@ -9,7 +9,6 @@ document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll('input[name="started_at"]').forEach((el) => { el.value = now; });
 
   wireForm("signup-form", "signup-status", "/api/subscribe", "Thanks — you're on the list.");
-  wireForm("contact-form", "contact-status", "/api/contact", "Message sent. I'll be in touch.");
 });
 
 function wireForm(formId, statusId, endpoint, successMsg) {
