@@ -1,0 +1,14 @@
+{
+  "name": "sgdietz-site",
+  "version": "1.0.0",
+  "description": "sgdietz.com — static site with Vercel serverless API for email signup and contact form.",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vercel dev",
+    "build": "echo 'static site, no build step' && exit 0"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

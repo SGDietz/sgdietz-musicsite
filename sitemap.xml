@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://sgdietz.com/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://sgdietz.com/public/art/banner.jpg</image:loc>
+      <image:title>SG Dietz and his Mismatched Plaids</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://sgdietz.com/public/art/fiesta-cancion.jpg</image:loc>
+      <image:title>Fiesta Cancion</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://sgdietz.com/public/art/bounce.jpg</image:loc>
+      <image:title>Bounce</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://sgdietz.com/public/art/6-foot-dick.jpg</image:loc>
+      <image:title>6 Foot Dick</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://sgdietz.com/public/art/destruction-guitars.jpg</image:loc>
+      <image:title>Destruction Guitars</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://sgdietz.com/public/art/mysterioso.jpg</image:loc>
+      <image:title>Mysterioso</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://sgdietz.com/who-is.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://sgdietz.com/contact.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+</urlset>
