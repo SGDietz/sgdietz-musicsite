@@ -29,7 +29,7 @@ export default function Home() {
   return (
     <main>
       <header className="topbar">
-        <a className="sigil" href="#top" aria-label="SG Dietz home">SGDIETZ</a>
+        <a className="sigil" href="#top" aria-label="SG Dietz home">SG DIETZ</a>
         <nav aria-label="Primary navigation"><a href="#music">Music</a><a href="#story">Story</a><a href="#contact">Contact</a></nav>
         <a className="listen-small" href="#music">Enter the noise <ArrowDownRight size={16} /></a>
       </header>
@@ -90,9 +90,9 @@ export default function Home() {
         <div className="direct-block">
           <h2><em>Reach Me Directly</em></h2>
           <a className="x-profile-card" href="https://x.com/SGDietzX" target="_blank" rel="noreferrer" aria-label="SG Dietz on X, @SGDietzX">
-            <img className="x-avatar" src="/art/banner.jpg" alt="" />
+            <img className="x-avatar" src="https://dietzx.ai/g-portrait-047.png" alt="G in a black coat with a flared collar" />
             <span className="x-identity"><strong>SG Dietz</strong><small>@SGDietzX</small></span>
-            <span className="x-invite">Step into my world</span>
+            <span className="x-invite">Step Into My World</span>
             <span className="x-mark" aria-hidden="true">𝕏</span>
             <span className="x-arrow" aria-hidden="true"><ArrowUpRight size={24} /></span>
           </a>
@@ -100,7 +100,7 @@ export default function Home() {
         </div>
       </section>
       <footer>
-        <span>© 2026 SGDietz. All Rights Reserved.</span>
+        <span className="corporate-line">©2026 DietzX llc. All Rights Reserved. · <a href="tel:+18552532727">855-253-2727</a> · <a href="https://dietzx.ai" target="_blank" rel="noreferrer">DietzX.ai</a></span>
         <nav className="legal-links" aria-label="Legal"><a href="/privacy">Privacy Policy</a><a href="/terms">Terms of Use</a><a href="/cookies">Cookie Notice</a><a href="/accessibility">Accessibility</a></nav>
         <a href="#top">BACK TO THE TOP ↑</a>
       </footer>
